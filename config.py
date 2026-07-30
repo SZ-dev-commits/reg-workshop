@@ -10,5 +10,5 @@ DATA_DIR = Path(__file__).parent / "data"
 SUPPORTED_SUFFIXES = {".md", ".txt"}
 
 FALLBACK_RESPONSE = "I couldn't find that information in the provided documents."
-MODEL_NAME = "gemini-3.6-flash"
+MODEL_NAME = "models/gemini-3.6-flash"
 EMBEDDING_MODEL = "models/gemini-embedding-2"

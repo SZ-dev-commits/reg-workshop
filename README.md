@@ -1,82 +1,98 @@
-# Build Your Own Themed RAG Assistant
+# RAG Assistant with Gemini File Search
 
-## What you will build
+A Retrieval-Augmented Generation (RAG) assistant built with Google Gemini's File Search API and Streamlit. This application allows you to upload documents and ask questions about them with grounded, source-cited answers.
 
-Your finished assistant will:
+## Features
 
-- use at least two `.txt` or `.md` documents;
-- answer questions using Gemini File Search;
-- display the filenames used as sources;
-- say when an answer is unavailable; and
-- have a theme and at least two personal improvements.
+- **Document Upload**: Support for `.txt` and `.md` files
+- **Grounded Answers**: Responses are strictly based on uploaded documents
+- **Source Citation**: Displays which documents were used for each answer
+- **Fallback Handling**: Gracefully handles questions outside document scope
+- **Modern UI**: Clean Streamlit interface with sidebar document management
 
-## Set up the project
+## Requirements
 
-You need Python 3.11 or newer and a Gemini API key.
+- Python 3.11 or newer
+- Gemini API key
 
-1. Install the packages:
+## Installation
 
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd rag-workshop
+   ```
+
+2. Create a virtual environment:
+   ```bash
+   python -m venv .venv
+   .venv\Scripts\activate  # On Windows
+   # or
+   source .venv/bin/activate  # On macOS/Linux
+   ```
+
+3. Install dependencies:
    ```bash
    python -m pip install -r requirements.txt
    ```
 
-2. Copy `.env.example` to a new file named `.env`. Replace
-   `your_key_here` with your Gemini API key. Never put the key directly in
-   a Python file, share it, or commit `.env`.
+4. Set up environment variables:
+   - Copy `.env.example` to `.env`
+   - Replace `your_key_here` with your Gemini API key
+   - Never commit `.env` to version control
 
-3. Add at least two themed `.txt` or `.md` files to `data/`.
+## Usage
 
-4. Start the app:
+1. Add your documents to the `data/` folder (at least two `.txt` or `.md` files)
 
+2. Start the application:
    ```bash
    streamlit run app.py
    ```
 
-The starter launches before the TODOs are complete. It will tell you which
-task is still unfinished.
+3. In the browser:
+   - Click "Prepare document library" to upload and index your documents
+   - Ask questions in the text input field
+   - View answers with source citations
 
-## Complete the worksheet tasks
+## Project Structure
 
-The four coding TODOs match worksheet Steps 4-7:
+```
+rag-workshop/
+├── app.py              # Streamlit interface
+├── rag.py              # Gemini API and RAG logic
+├── config.py           # Configuration settings
+├── requirements.txt    # Python dependencies
+├── .env.example        # Environment variables template
+├── data/               # Document storage folder
+└── README.md          # This file
+```
 
-1. Connect to Gemini in `rag.py`.
-2. Create a theme-specific File Search store in `rag.py`.
-3. Upload and process every document in `rag.py`.
-4. Ask grounded questions and collect cited filenames in `rag.py`.
+## Configuration
 
-The Streamlit interface in `app.py` is already complete. You do not need to
-understand Streamlit to complete the RAG tasks. For worksheet Step 8, run the
-app and check that an answer and its source filenames appear on the page.
-
-The project is split into three small Python files:
-
-- `app.py` contains the completed Streamlit interface.
-- `rag.py` contains the Gemini and document-search code.
-- `config.py` contains the settings you can personalise.
-
-Use the hints beside each TODO and the
-[Gemini File Search documentation](https://ai.google.dev/gemini-api/docs/file-search)
-when you need to check an API call.
-
-## Test your assistant
-
-Before personalising the design, check all of these:
-
-- The sidebar lists at least two documents.
-- **Prepare document library** finishes successfully.
-- A question covered by the documents produces a useful answer.
-- The source filenames appear below the answer.
-- A question not covered by the documents produces:
-  `I couldn't find that information in the provided documents.`
-- The API key is present only in `.env`.
+Edit `config.py` to customize:
+- `APP_TITLE`: Application title
+- `APP_DESCRIPTION`: Application description
+- `MODEL_NAME`: Gemini model to use
+- `EMBEDDING_MODEL`: Embedding model for document indexing
+- `FALLBACK_RESPONSE`: Message when answer is not found
 
 ## Troubleshooting
 
-- **No documents found:** Check that the files are directly inside `data/` and
-  end in `.txt` or `.md`.
-- **Missing API key:** Check that the file is named exactly `.env` and the
-  variable is named `GEMINI_API_KEY`.
-- **Upload appears stuck:** Processing can take a little time. Make sure TODO 3
-  refreshes the operation while waiting.
-- **Wrong or unsupported answers:** Strengthen the grounding instructions in
-  TODO 4 and test with a question whose answer is absent from every document.
+- **No documents found**: Ensure files are in `data/` and have `.txt` or `.md` extensions
+- **Missing API key**: Check that `.env` file exists and contains `GEMINI_API_KEY`
+- **Upload appears stuck**: Document processing may take time; be patient
+- **Wrong answers**: Strengthen grounding instructions in `rag.py` for better accuracy
+
+## API Reference
+
+- [Gemini File Search Documentation](https://ai.google.dev/gemini-api/docs/file-search)
+- [Streamlit Documentation](https://docs.streamlit.io/)
+
+## License
+
+This project is provided as-is for educational purposes.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit issues or pull requests.
